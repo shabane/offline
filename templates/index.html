@@ -19,9 +19,10 @@
           </div>
 
           <ul class="list-group list-group-flush">
+              {% for page in pages %}
 
               <div class="list-group-item d-flex">
-                  <a href="https://google.com" class="form-control me-2">google</a>
+                  <a href="{{ page.link }}" class="form-control me-2">{{ page.title }}</a>
                   <button class="btn btn-outline-warning me-2">
                       <span class="icono-rename" style="color: black;"></span>
                   </button>
@@ -29,8 +30,9 @@
                   <button class="btn btn-outline-danger me-2">
                       <span class="icono-trash" style="color: black;"></span>
                   </button>
-
               </div>
+
+              {% endfor %}
           </ul>
         </div>
     </div>

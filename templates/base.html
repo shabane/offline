@@ -15,15 +15,16 @@
 
 <header>
         <nav class="navbar bg-light">
-            <form class="container-fluid">
+            <form class="container-fluid" method="post" action=".">
+                {% csrf_token %}
                 <div class="input-group">
                     <div class="btn btn-outline-dark" id="basic-addon1">
                         <span class="icono-user"></span>
                     </div>
 
                     <div> <h1>&nbsp;</h1> </div>
-                    <input type="text" class="form-control" placeholder="Url to fetch" aria-label="Username" aria-describedby="basic-addon1">
-                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <input name="url" type="text" class="form-control" placeholder="Url to fetch" aria-label="Username" aria-describedby="basic-addon1">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary" type="button">
                         <span class="input-group-text" id="basic-addon1">
                             <img width="30" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAABeElEQVR4nO2ZMU7DMBhGnytOAis36ModGBCsPQJrK1bEBAKprEXiPoz0BEwIZsIQR02jJJCo6Zcm35MsWY3TPH/541YxGGOMMcaYcRKE154AF7G/An6ELhKugCS2S5XERHVh4DjXP1FJKAPoBQ5ALaDGAagF1DgAtYAaB6AWUOMA1AJqHIBaQI0DUAuo6TqAG+AbuKXZ26cA3MVzFx147Y0vNm99ntgOYZ47Ns99HuLY7Nhnl4JdV8Ay158Bj9RXQohjZhXfcXAE4J7N3UyAZ9LgixUQgIfC2CUDWKeqQliwHcAgJ59RfK4T4KOiX7ZeDIKySihrg7rzRf4KYdCTz6gKYRSTzyiGIJu8cqEJwHnsv5IGYfZNkwro+25u53692M2toZVfk4WnF7u5NbTyG83PThUOQC2gxgGoBdQ4ALWAmqOW502B612K7IBpm5PaBnAW28HT5BFYd2axe97/O7BJBaxI/2efNtbZL2/Ai1rCGGOMMcb0nV/wQ2Ny2wsxgAAAAABJRU5ErkJggg==">
                         </span>
