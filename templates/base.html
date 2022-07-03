@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,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">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+</head>
+<body style="background: #ECF0F1">
+
+<header>
+        <nav class="navbar bg-light">
+            <form class="container-fluid">
+                <div class="input-group">
+                    <div class="btn btn-outline-dark" id="basic-addon1">
+                        <span class="icono-user"></span>
+                    </div>
+
+                    <div> <h1>&nbsp;</h1> </div>
+                    <input type="text" class="form-control" placeholder="Url to fetch" aria-label="Username" aria-describedby="basic-addon1">
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <span class="input-group-text" id="basic-addon1">
+                            <img width="30" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAABeElEQVR4nO2ZMU7DMBhGnytOAis36ModGBCsPQJrK1bEBAKprEXiPoz0BEwIZsIQR02jJJCo6Zcm35MsWY3TPH/541YxGGOMMcaYcRKE154AF7G/An6ELhKugCS2S5XERHVh4DjXP1FJKAPoBQ5ALaDGAagF1DgAtYAaB6AWUOMA1AJqHIBaQI0DUAuo6TqAG+AbuKXZ26cA3MVzFx147Y0vNm99ntgOYZ47Ns99HuLY7Nhnl4JdV8Ay158Bj9RXQohjZhXfcXAE4J7N3UyAZ9LgixUQgIfC2CUDWKeqQliwHcAgJ59RfK4T4KOiX7ZeDIKySihrg7rzRf4KYdCTz6gKYRSTzyiGIJu8cqEJwHnsv5IGYfZNkwro+25u53692M2toZVfk4WnF7u5NbTyG83PThUOQC2gxgGoBdQ4ALWAmqOW502B612K7IBpm5PaBnAW28HT5BFYd2axe97/O7BJBaxI/2efNtbZL2/Ai1rCGGOMMcb0nV/wQ2Ny2wsxgAAAAABJRU5ErkJggg==">
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </nav>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer>
+
+    </footer>
+
+</body>
+</html>

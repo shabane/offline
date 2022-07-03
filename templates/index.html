@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} offline {% endblock %}
+
+
+{% block content %}
+    <div style="margin: 3%; " class="col-11">
+            <div class="card" style="">
+        <div class="card-header">
+            <nav class="navbar bg-light">
+              <form class="container-fluid">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+                  <div class="btn btn-outline-warning">
+                      <span class="icono-search" style="color:black" id="basic-addon1"></span>
+                  </div>
+                </div>
+              </form>
+            </nav>
+          </div>
+
+          <a class="list-group list-group-flush">
+              <a href="https://google.com">
+                  <li class="list-group-item" style="margin-left: 1%">An item</li>
+              </a>
+          </ul>
+        </div>
+    </div>
+
+{% endblock %}

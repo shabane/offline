@@ -1,1 +1,3 @@
 env/
+offline/__pycache__/
+.idea/
