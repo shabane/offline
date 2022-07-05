@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} offline {% endblock %}
-
+{% load static %}
 
 {% block content %}
     <div style="margin: 3%; " class="col-11">
@@ -22,7 +22,7 @@
               {% for page in pages %}
 
               <div class="list-group-item d-flex">
-                  <a href="{{ page.link }}" class="form-control me-2">{{ page.title }}</a>
+                  <a target="_blank" href="{% static page.path %}" class="form-control me-2">{{ page.title }}</a>
                   <button class="btn btn-outline-warning me-2">
                       <span class="icono-rename" style="color: black;"></span>
                   </button>
