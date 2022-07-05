@@ -16,6 +16,8 @@ def index(request):
 
     context = {'pages': lst}
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return render(request, 'error.html', {'error': 'you are not authenticated, pleas login first'})
         url = request.POST.get('url')
         site = requests.get(url)
         domain = url.split('/')[2]
