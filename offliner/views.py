@@ -4,7 +4,7 @@ import requests
 from .models import Paper, User
 from bs4 import BeautifulSoup as bs
 from hashlib import blake2b
-import subprocess
+from . import moduls
 
 def index(request):
     lst = []
@@ -20,7 +20,6 @@ def index(request):
             return render(request, 'error.html', {'error': 'you are not authenticated, pleas login first'})
         url = request.POST.get('url')
         site = requests.get(url)
-        domain = url.split('/')[2]
 
         if site.status_code != 200 and site.status_code != 403:
             return render(request, 'error.html', {'error': f'the url which you provide cant be reached, code: {site.status_code}'})
@@ -32,13 +31,11 @@ def index(request):
         if not os.path.exists(f'offpages/{user}/{dir_name}'):
             os.mkdir(f'offpages/{user}/{dir_name}')
 
-        files = list(os.listdir(f'offpages/{user}/{dir_name}'))
-        file_name = 'index.html' if 'index.html' in files else os.path.basename(url)+'.html'
+        result = moduls.pageToHtml(url, f'offpages/{user}/{dir_name}')
 
+        if not result['ok']:
+            return render(request, 'error.html', {'error': result['logs']})
 
-        if not os.system(f'cd offpages/{user}/{dir_name} && wget -nd -c -E -H -k -p {url}'):
-            return render(request, 'error.html', {'error': 'site could not download'})
-
-        Paper.objects.create(owner=user, title=title, url=url, path=f'{user}/{dir_name}/{file_name}')
+        Paper.objects.create(owner=user, title=title, url=url, path=f'{user}/{dir_name}/index.html')
 
     return render(request, 'index.html', context)
