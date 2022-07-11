@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup as bs
 import os
 
 
+def isLink(url: str) -> bool:
+    return True if url.split('/')[0][:4] == 'http' else False
+
+
 def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
     """download the page and save it under PATH
 
@@ -21,8 +25,9 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
         'logs': '',
     }
 
-
     page = requests.get(url)
+    domain = url.split('/')[2]
+    prefix = f"{url.split('/')[0]}//" if 'www.' in url.split('/')[2] else f'{url.split("/")[0]}//www.'
 
     if page.status_code != 200:
         result['logs'] += f'site returned {page.status_code} http code'
@@ -44,10 +49,26 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
     for kind in result['files']:
         for i in result['files'][kind]:
             if i:
-                with open(f'{path}/{os.path.basename(i)}', 'wb') as fli:
-                    file = requests.get(i)
-                    if file.status_code == 200:
-                        fli.write(file.content)
-                        result['logs'] += f'\nfile {i} downloaded'
-                    else:
-                        result['logs'] += f'\ncould not get the {i}'
+                if 'data:image' not in i:
+                    with open(f'{path}/{os.path.basename(i)}', 'wb') as fli:
+                        file = requests.get(i) if isLink(i) else requests.get(f'{prefix}{domain}{i}')
+                        if file.status_code == 200:
+                            fli.write(file.content)
+                            result['logs'] += f'\nfile {i} downloaded'
+                        else:
+                            result['logs'] += f'\ncould not get the {prefix}{domain}{i}, http code: {file.status_code}'
+
+    for i in ['img', 'script']:
+        for j in bspage.find_all(i):
+            if j.get('src'):
+                if 'data:image' not in j['src']:
+                    j['src'] = os.path.basename(j['src'])
+
+    for style in bspage.find_all('link'):
+        style['href'] = os.path.basename(style['href']) if style.get('href') else ...
+
+    with open(f'{path}/index.html', 'w') as fli:
+        fli.write(str(bspage))
+
+    return result
+
