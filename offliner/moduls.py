@@ -51,7 +51,10 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
             if i:
                 if 'data:image' not in i:
                     with open(f'{path}/{os.path.basename(i)}', 'wb') as fli:
-                        file = requests.get(i) if isLink(i) else requests.get(f'{prefix}{domain}{i}')
+                        try:
+                            file = requests.get(i) if isLink(i) else requests.get(f'{prefix}{domain}{i}')
+                        except:
+                            file = requests.get(f'{prefix}{domain}{i}'.replace('www.', ''))
                         if file.status_code == 200:
                             fli.write(file.content)
                             result['logs'] += f'\nfile {i} downloaded'
@@ -71,4 +74,3 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
         fli.write(str(bspage))
 
     return result
-
