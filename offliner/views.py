@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup as bs
 from hashlib import blake2b
 from . import moduls
 
+
 def index(request):
     lst = []
     if request.user.is_authenticated:
@@ -37,5 +38,7 @@ def index(request):
             return render(request, 'error.html', {'error': result['logs']})
 
         Paper.objects.create(owner=user, title=title, url=url, path=f'{user}/{dir_name}/index.html')
+        lst = Paper.objects.filter(owner=user)[::-1]
+        context = {'pages': lst}
 
     return render(request, 'index.html', context)
