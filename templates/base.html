@@ -19,9 +19,20 @@
             <form class="container-fluid" method="post" action=".">
                 {% csrf_token %}
                 <div class="input-group">
-                    <div class="btn btn-outline-dark" id="basic-addon1">
-                        <span class="icono-user"></span>
-                    </div>
+
+                    {% if user.is_authenticated %}
+                        <a href="/accounts/profile">
+                            <div class="btn btn-outline-dark" id="basic-addon1">
+                                <span class="icono-user"></span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="/accounts/login">
+                            <div class="btn btn-outline-dark" id="basic-addon1">
+                                <span class="icono-user"></span>
+                            </div>
+                        </a>
+                    {% endif %}
 
                     <div> <h1>&nbsp;</h1> </div>
                     <input name="url" type="text" class="form-control" placeholder="Url to fetch" aria-label="Username" aria-describedby="basic-addon1">
