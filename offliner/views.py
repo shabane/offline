@@ -42,3 +42,20 @@ def index(request):
         context = {'pages': lst}
 
     return render(request, 'index.html', context)
+
+
+def delete(request, page_id):
+    if not request.user.is_authenticated:
+        return render(request, 'error.html', {'error': 'you are not authenticated, pleas login first'})
+
+    user = request.user
+    if(page := Paper.objects.filter(owner=user, id=page_id)):
+        import shutil
+        path = f'offpages/{page[0].path}'.replace('index.html', '')
+        shutil.rmtree(path)
+        page.delete()
+        lst = Paper.objects.filter(owner=user)[::-1]
+        context = {'pages': lst}
+        return render(request, 'index.html', context)
+
+    return render(request, 'error.html', {'error': 'permission denied'})

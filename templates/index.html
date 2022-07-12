@@ -23,13 +23,14 @@
 
               <div class="list-group-item d-flex">
                   <a target="_blank" href="{% static page.path %}" class="form-control me-2">{{ page.title }}</a>
+
                   <button class="btn btn-outline-warning me-2">
                       <span class="icono-rename" style="color: black;"></span>
                   </button>
 
-                  <button class="btn btn-outline-danger me-2">
+                  <a class="btn btn-outline-danger me-2" href="{{ page.id }}/delete">
                       <span class="icono-trash" style="color: black;"></span>
-                  </button>
+                  </a>
               </div>
 
               {% endfor %}
