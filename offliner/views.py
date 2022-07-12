@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import os
 import requests
 from .models import Paper, User
@@ -57,6 +57,6 @@ def delete(request, page_id):
         page.delete()
         lst = Paper.objects.filter(owner=user)[::-1]
         context = {'pages': lst}
-        return render(request, 'index.html', context)
+        return redirect('/')
 
     return render(request, 'error.html', {'error': 'permission denied'})
