@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import os
+from . import header
 
 
 def isLink(url: str) -> bool:
@@ -25,7 +26,9 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
         'logs': '',
     }
 
-    page = requests.get(url)
+    headers = header.headers
+
+    page = requests.get(url, headers=headers)
     domain = url.split('/')[2]
     prefix = f"{url.split('/')[0]}//" if 'www.' in url.split('/')[2] else f'{url.split("/")[0]}//www.'
 
@@ -52,9 +55,9 @@ def pageToHtml(url: str, path: str, debug:bool=True) -> dict:
                 if 'data:image' not in i:
                     with open(f'{path}/{os.path.basename(i)}', 'wb') as fli:
                         try:
-                            file = requests.get(i) if isLink(i) else requests.get(f'{prefix}{domain}{i}')
+                            file = requests.get(i, headers=headers) if isLink(i) else requests.get(f'{prefix}{domain}{i}', headers=headers)
                         except:
-                            file = requests.get(f'{prefix}{domain}{i}'.replace('www.', ''))
+                            file = requests.get(f'{prefix}{domain}{i}'.replace('www.', ''), headers=headers)
                         if file.status_code == 200:
                             fli.write(file.content)
                             result['logs'] += f'\nfile {i} downloaded'

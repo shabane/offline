@@ -5,6 +5,7 @@ from .models import Paper, User
 from bs4 import BeautifulSoup as bs
 from hashlib import blake2b
 from . import moduls
+from . import header
 
 
 def index(request):
@@ -20,7 +21,7 @@ def index(request):
         if not request.user.is_authenticated:
             return render(request, 'error.html', {'error': 'you are not authenticated, pleas login first'})
         url = request.POST.get('url')
-        site = requests.get(url)
+        site = requests.get(url, headers=header.headers)
 
         if site.status_code != 200 and site.status_code != 403:
             return render(request, 'error.html', {'error': f'the url which you provide cant be reached, code: {site.status_code}'})
