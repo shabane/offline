@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} offline {% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <div>
+        <button style="margin: 2%" class="btn btn-outline-danger">
+            <a href="{% url 'logout' %}">Click to log you out!</a>
+        </button>
+    </div>
+{% endblock %}
