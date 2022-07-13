@@ -8,3 +8,6 @@ class Paper(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     path = models.TextField(default='')
+
+    def __str__(self) -> str:
+        return self.title
