@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-)rjmc#_4+4diihvb__bk3cfiv074@kn)p24+*7)n(c(q5jt4+)
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://offliner-loading.fandogh.cloud']
 
 # Application definition
 
